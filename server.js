@@ -72,16 +72,7 @@ app.post('/atualizar', async (req, res) => {
         const result = await collection.updateOne(
             { _id: new ObjectId(id) }, // Utilize o ObjectId importado
             {
-                $set: {
-                    titulo,
-                    autor,
-                    ano_publicacao,
-                    genero,
-                    editora,
-                    paginas,
-                    idioma,
-                    ISBN,
-                    disponivel: disponivel === "true"
+                $set: {titulo,autor,ano_publicacao, genero,editora,paginas,idioma,ISBN,disponivel: disponivel === "true"
                 }
             }
         );
@@ -126,9 +117,6 @@ app.get('/livro/:id', async (req, res) => {
         client.close();
     }
 });
-
-
-
 
 // Rota para lidar com a submissão do formulário de deleção
 app.post('/deletar', async (req, res) => {
