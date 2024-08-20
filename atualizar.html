@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atualizar Livro</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Atualizar Livro</h1>
+                        <form action="/atualizar" method="post">
+                            <input type="hidden" id="id" name="id">
+                            <div class="form-group">
+                                <label for="titulo">Título:</label>
+                                <input type="text" class="form-control" id="titulo" name="titulo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="autor">Autor:</label>
+                                <input type="text" class="form-control" id="autor" name="autor" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ano_publicacao">Ano de Publicação:</label>
+                                <input type="number" class="form-control" id="ano_publicacao" name="ano_publicacao" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="genero">Gênero:</label>
+                                <input type="text" class="form-control" id="genero" name="genero" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="editora">Editora:</label>
+                                <input type="text" class="form-control" id="editora" name="editora" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paginas">Número de Páginas:</label>
+                                <input type="number" class="form-control" id="paginas" name="paginas" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="idioma">Idioma:</label>
+                                <input type="text" class="form-control" id="idioma" name="idioma" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ISBN">ISBN:</label>
+                                <input type="text" class="form-control" id="ISBN" name="ISBN" required>
+                            </div>
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="disponivel" name="disponivel" value="true">
+                                <label class="form-check-label" for="disponivel">Disponível</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Atualizar Livro</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const livroId = urlParams.get('id');
+
+            if (livroId) {
+                fetch(`/livro/${livroId}`)
+                    .then(response => response.json())
+                    .then(livro => {
+                        document.getElementById('id').value = livro._id;
+                        document.getElementById('titulo').value = livro.titulo;
+                        document.getElementById('autor').value = livro.autor;
+                        document.getElementById('ano_publicacao').value = livro.ano_publicacao;
+                        document.getElementById('genero').value = livro.genero;
+                        document.getElementById('editora').value = livro.editora;
+                        document.getElementById('paginas').value = livro.paginas;
+                        document.getElementById('idioma').value = livro.idioma;
+                        document.getElementById('ISBN').value = livro.ISBN;
+                        document.getElementById('disponivel').checked = livro.disponivel;
+                    })
+                    .catch(error => console.error('Erro ao carregar dados do livro:', error));
+            }
+        });
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
