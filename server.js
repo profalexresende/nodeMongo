@@ -10,7 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method')); // Middleware para suportar métodos HTTP alternativos
 
 // Configuração da URL de conexão com o MongoDB
-const url = 'mongodb://127.0.0.1:27017/';
+//const url = 'mongodb://127.0.0.1:27017/'; - Conexão Local
+//Conexão com o Atlas
+const url = 'mongodb+srv://prof_alexresende:testeaulafiap@aulafiap.bkzjyl8.mongodb.net/?appName=AulaFiap'; 
 const dbName = 'livraria';
 const collectionName = 'livros';
 
